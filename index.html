@@ -20,13 +20,18 @@
         deploymentId: '7292b102-64e6-4ef7-b02d-d65aa2e85719'
       });
 
-      // Set the Messenger name to James
+      // 1. Set the name to James in the database
       Genesys("command", "Database.set", {
         messaging: {
           customAttributes: {
             name: "James"
           }
         }
+      });
+
+      // 2. AUTO-LAUNCH: Open messenger as soon as it is ready
+      Genesys("subscribe", "Launcher.ready", function() {
+        Genesys("command", "Messenger.open");
       });
     </script>
 
@@ -51,7 +56,6 @@
             border-radius: 20px;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             border: 1px rgba(255, 255, 255, 0.2) solid;
-            /* Ensures content stays centered */
             max-width: 400px;
             width: 90%;
         }
@@ -64,7 +68,7 @@
 
     <div class="container">
         <h1>Hi, I'm James</h1>
-        <p>Our support messenger is loading...</p>
+        <p>I'm opening the chat window for you now...</p>
     </div>
 
 </body>
