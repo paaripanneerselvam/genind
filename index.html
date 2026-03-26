@@ -4,13 +4,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Messaging</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            padding: 20px; 
+            /* Added Ocean Background Styling */
+            background-image: url('https://unsplash.com');
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #333; /* Ensures text is readable against the background */
+        }
+        
+        .header-container {
+            background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent box for text legibility */
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .instruction-text {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
     <div id="genesys-support-center"></div>
-    <ul>
-        <li><a href="index.html">Product Support Home Page</a></li>
-    </ul>
-    <h1>Product Support - Web Message</h1>
+
+    <div class="header-container">
+        <h1>Product Support - Web Message</h1>
+        <h3 class="instruction-text">
+            Click the message icon at the bottom right corner to start a chat with an Agent
+        </h3>
+    </div>
+
     <script type="text/javascript" charset="utf-8">
       (function (g, e, n, es, ys) {
         g['_genesysJs'] = e;
@@ -20,12 +50,11 @@
         g[e].t = 1 * new Date();
         g[e].c = es;
         ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
-      })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
+      })(window, 'Genesys', 'https://mypurecloud.com', {
         environment: 'prod-usw2',
         deploymentId: '7292b102-64e6-4ef7-b02d-d65aa2e85719'
       });
 
-      // Wait for Genesys to load, then set custom attributes
       function setGenesysCustomAttributes() {
         if (typeof Genesys === "function") {
           Genesys("command", "Database.set", {
