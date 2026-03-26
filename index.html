@@ -1,11 +1,16 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Support - James</title>
-    
-    <!-- Genesys Messenger Script -->
+    <title>Web Messaging</title>
+</head>
+<body>
+    <div id="genesys-support-center"></div>
+    <ul>
+        <li><a href="index.html">Product Support Home Page</a></li>
+    </ul>
+    <h1>Product Support - Web Message</h1>
     <script type="text/javascript" charset="utf-8">
       (function (g, e, n, es, ys) {
         g['_genesysJs'] = e;
@@ -15,86 +20,30 @@
         g[e].t = 1 * new Date();
         g[e].c = es;
         ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
-      })(window, 'Genesys', 'https://pure.cloud', {
+      })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
         environment: 'prod-usw2',
         deploymentId: '7292b102-64e6-4ef7-b02d-d65aa2e85719'
       });
 
-      // Set the Messenger name to James in the backend
-      Genesys("command", "Database.set", {
-        messaging: {
-          customAttributes: {
-            name: "James"
-          }
+      // Wait for Genesys to load, then set custom attributes
+      function setGenesysCustomAttributes() {
+        if (typeof Genesys === "function") {
+          Genesys("command", "Database.set", {
+            messaging: {
+              customAttributes: {
+                department: "Product Support",
+                PSG_skill: "API/Integration",
+                device: "mobile",
+                Cust_Issue: "SSO login",
+                name: "John Cena"
+              }
+            }
+          });
+        } else {
+          setTimeout(setGenesysCustomAttributes, 500);
         }
-      });
+      }
+      setTimeout(setGenesysCustomAttributes, 1000);
     </script>
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            border: 1px rgba(255, 255, 255, 0.2) solid;
-            max-width: 450px;
-            width: 90%;
-        }
-
-        h1 { margin-bottom: 0.5rem; font-size: 2.5rem; }
-        p { margin-bottom: 2rem; opacity: 0.9; font-size: 1.1rem; }
-
-        .chat-button {
-            background-color: #ffffff;
-            color: #764ba2;
-            border: none;
-            padding: 18px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .chat-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background-color: #f0f0f0;
-        }
-
-        .chat-button:active {
-            transform: translateY(-1px);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>Hi, I'm James</h1>
-        <p>Ready to help you with any questions. Click below to start chatting!</p>
-        
-        <!-- This button triggers the Messenger.open command -->
-        <button class="chat-button" onclick="Genesys('command', 'Messenger.open');">
-            Chat with James
-        </button>
-    </div>
-
 </body>
 </html>
